@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  # 如果要使用自定义的登录页面，需要先禁用security默认的的basic登录页
+security:
+    basic:
+      enable: false
+spring:
+            #  application:
+            #    name: adt-credit-service
+            #  main:
+            #    allow-bean-definition-overriding: true #解决Bean重复定义
+            datasource:
+              #   数据源基本配置
+              username: root
+              password: 123456
+              driver-class-name: com.mysql.cj.jdbc.Driver
+              url: jdbc:mysql://111.229.243.85:3306/SpringSecurity?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+              type: com.alibaba.druid.pool.DruidDataSource
+              #controller返回string,跳转的指定页面路径前缀
+              thymeleaf:
+                prefix: classpath:/templates/
+                suffix: .html
+                mode: HTML5
+                encoding: UTF-8
+                cache: false
+                servlet:
+                  content-type: text/html
+
+              mvc:
+                static-path-pattern: /**
+                hiddenmethod:
+                  filter:
+                    enabled: true
+                #静态资源的默认访问路径前缀
+              resources:
+                static-locations: classpath:/templates
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.study.entity
+  configuration:
+    map-underscore-to-camel-case: true
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+
