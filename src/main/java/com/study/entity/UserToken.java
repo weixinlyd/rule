@@ -9,7 +9,7 @@ public class UserToken implements Serializable {
         this.userId = userId;
         this.username = username;
     }
-
+//
     /**
      * 用户id
      */
