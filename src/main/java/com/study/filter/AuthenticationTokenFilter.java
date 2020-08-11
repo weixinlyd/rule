@@ -27,13 +27,16 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-//        // 从参数中提取出当前请求的URL
+        // 从参数中提取出当前请求的URL
+        //1.先判断url是否为登录,如果不为登录,查缓存,看缓存中是否存在
+        // 2.若缓存中不存在,对前端发送来的token值进行解析,来判断该用户是否是同一用户
 //        String requestUrl = ((FilterInvocation)request).getRequestUrl();
 //        if ("/login".equals(requestUrl)) {
 //            System.out.println("登陆无需角色判断");
 //            //登陆无需角色判断
 //            return null;
 //        }
+
         UserToken userToken = new UserToken();
         String authHeader = request.getHeader("token");//获取header中的验证信息
         if (authHeader != null && authHeader.startsWith("Bearer ")) {

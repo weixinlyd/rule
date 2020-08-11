@@ -11,8 +11,6 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
-
-import javax.management.BadAttributeValueExpException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

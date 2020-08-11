@@ -34,6 +34,21 @@ spring:
                 #静态资源的默认访问路径前缀
               resources:
                 static-locations: classpath:/templates
+              #集群redis配置
+            redis:
+              cluster:
+                nodes: 114.67.102.106:6379,111.229.214.157:6379,111.229.243.85:6379,114.67.102.106:6380,111.229.214.157:6380,111.229.243.85:6380
+                connectionTimeout: 6000
+                soTimeout: 6000
+                maxAttempts: 5
+              lettuce:
+                pool:
+                  max-idle: 16
+                  max-active: 32
+                  min-idle: 8
+              timeout: 5000
+
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.study.entity

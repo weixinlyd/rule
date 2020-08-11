@@ -14,4 +14,6 @@ public interface UserMapper {
 
      List<Role> getUserRolesByUid(@Param("id") Integer id);
 
+
+
 }
