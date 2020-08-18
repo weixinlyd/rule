@@ -161,6 +161,7 @@
         <!--</includes>-->
         <!--</resource>-->
         <!--</resources>-->
+        <finalName>rule</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

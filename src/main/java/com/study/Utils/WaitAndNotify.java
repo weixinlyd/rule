@@ -22,7 +22,7 @@ public class WaitAndNotify {
             TimeUnit.SECONDS.sleep(2);
             System.out.println("-----Main Thread notify-----");
             synchronized (co) {
-                //notify()方法会随机唤醒等待池的一个线程,而换成notify()方法会将所有等待池的线程加入锁池中
+                //notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法会将所有等待池的线程加入锁池中
                 co.notify();
             }
 
