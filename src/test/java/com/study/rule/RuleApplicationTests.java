@@ -12,7 +12,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.*;
 
 @SpringBootTest
 @Slf4j
@@ -174,6 +176,41 @@ class RuleApplicationTests {
         System.out.println("Main 线程 结束运行!");
 
         }
+
+    /**
+     * 线程生命周期
+     * @throws InterruptedException
+     */
+     public void ExecutorsClosed() throws InterruptedException {
+         ExecutorService es = Executors.newFixedThreadPool(50);//创建线程池
+         es.shutdown();//关闭
+         es.awaitTermination(1,TimeUnit.SECONDS);//全部关闭时间
+         List<Runnable> runnables = es.shutdownNow();//关闭
+         es.isShutdown();//判断
+         es.isTerminated();//判断
+     }
+
+
+    /**
+     * 周期性延迟线程池
+     */
+
+    Runnable scheduledRunnable = new Runnable() {
+        int i = 0;
+        @Override
+        public void run() {
+            System.out.println("date"+new Date());
+        }
+    };
+    @Test
+    public void ExecutorsScheduled() throws InterruptedException {
+        ExecutorService es = Executors.newScheduledThreadPool(50);
+        System.out.println("init"+new Date());
+        ScheduledFuture<?> future = ((ScheduledExecutorService) es).scheduleAtFixedRate(scheduledRunnable,4,1,TimeUnit.SECONDS);
+        System.out.println(future.isDone());
+        TimeUnit.SECONDS.sleep(10);
+        es.shutdownNow();
+    }
 
 
 }
