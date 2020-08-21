@@ -6,6 +6,10 @@ notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法�
 
 
 多线程
+线程里的变量  
+存储顺序  变量->本地内存->主内存
+当两个线程锁同一个对象时,线程A里的变量A与线程B里的变量A值相等.(赋值存到主内存，线程共享)
+
 从这个例子可以看出,线程赋值,并发情况下,结果可能不准确,count应该为10000，
 但是打印出来的结果不准
 因为count++相当于
@@ -94,7 +98,7 @@ notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法�
  线程池大小，需要考虑CPU核心数进行动态配置,以适应不同机器。
  可通过Runtime.getRuntime().availableProcessors()获取服务器CPU核心数。
  一般线程都需要有中断策略。
- 在使用synchronized进行内嵌时,一定要保证顺讯一致
+ 在使用synchronized进行内嵌时,一定要保证顺序一致
  当线程发生活跃性问题，考虑是不是有死锁了。
  
  多线程
@@ -110,4 +114,14 @@ notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法�
  使用submit方法还有一个特点就是，他的异常可以在主线程中catch到。
  而使用execute方法执行任务是捕捉不到异常的。
  
+ 显示锁
+ Lock接口和synchronized的比较：
+ 1，synchronized代码更简洁
+ 2，Lock，效率比隐士锁更高
+ 3，Lock可以在获取锁可以被中断，超时获取锁，尝试获取锁
+ 
+ 构建自定义同步工具
+ 相当于自定义一个 同步锁
+ Condition notFull = lock.newCondition();
+ Condition notEmpty = lock.newCondition();
        
