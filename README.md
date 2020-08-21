@@ -89,3 +89,25 @@ notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法�
        锁内嵌顺序
     协同对象之间死锁    
        资源死锁
+ 尽量避免new Thread().start()开启线程      
+ 使用Exector框架或者线程池执行批量执行多线程任务
+ 线程池大小，需要考虑CPU核心数进行动态配置,以适应不同机器。
+ 可通过Runtime.getRuntime().availableProcessors()获取服务器CPU核心数。
+ 一般线程都需要有中断策略。
+ 在使用synchronized进行内嵌时,一定要保证顺讯一致
+ 当线程发生活跃性问题，考虑是不是有死锁了。
+ 
+ 多线程
+ Callable和runnable区别 
+ Callable有返回值Future runnable
+ Future<T> future = es.submit();
+ future.get() 该方法为获取返回值，但是该方法在线程为执行完调用会形成阻塞状态
+ ，线程执行完才能正常调用。若该线程已经执行完毕，则可以直接调用
+ get(long var1, TimeUnit var3)这个方法就是设置等待时间的，拿取返回值。
+ 
+ 
+ 多线程submit()和execute()执行方法的区别
+ 使用submit方法还有一个特点就是，他的异常可以在主线程中catch到。
+ 而使用execute方法执行任务是捕捉不到异常的。
+ 
+       
