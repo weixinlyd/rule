@@ -41,7 +41,7 @@ public class FixConditionLengthBlockingQueue<T> {
             lock.unlock();
         }
     }
-    //爬蛋是否为堵塞状态,如果线程为空,则为堵塞状态
+    //判断是否为堵塞状态,如果线程为空,则为堵塞状态
     public T take() throws InterruptedException {
         T t = null;
         lock.lock();
