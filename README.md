@@ -124,4 +124,42 @@ notify()方法会随机唤醒等待池的一个线程,而换成notifAll()方法�
  相当于自定义一个 同步锁
  Condition notFull = lock.newCondition();
  Condition notEmpty = lock.newCondition();
+ 
+ K8S
+ 
+ 1.自动化部署:yaml部署到k8s,会根据应用程序计算资源需求，自动分配到node.
+ 2.系统自愈:当成功部署到k8s中,node节点宕机,k8s会重新将pod调度到可用节点
+ 3.水平扩展:HPA周期调整RC的副本数量,将用户定义的resource的值匹配
+ 4.服务发现和负载均衡:内置服务发现功能,为每个容器分配IP,service代理
+ 5.自动更新和回滚:监控应用状态,不会同时杀掉应用,更新出错,自动恢复到原先状态
+ 
+ 
+ 
+ Master节点和Node
+ 
+ Master节点是集群控制节点，负责整个集群的管理和控制
+ Api Server:提供接口,增删改查入口
+ Controller Manager:所有资源对象的自动化控制中心
+ Scheduler:负责资源调度
+ Etcd:master的持续状态都存在etcd
+ 
+ Node:Node工作节点,听从mater工作分配
+ Kubelet:Pod容器创建，启停集群管理等任务
+ kube-proxy:实现service的通信与负载均衡组件
+ Dcoker:Docker引擎,负责本机容器创建和管理工作
+ 
+ Rc是K8s集群中最早的保证Pod高可用的API对象。通过监控运行中的pod来保证
+ 集群中运行指定数目的Pod副本，指定数目可以是多个也可以是1个。少于指定
+ 数目Rc就会启动运行新的Pod副本;多于指定数目,Rc就会kill掉多余的Pod副本
+ 即使在指定数目为1的情况下，通过Rc运行Pod也比直接运行Pod更明智,因为Rc
+ 也可以发挥它高可用的能力,保证永远有1个Pod在运行。
+ 
+ 一个Pod只是一个运行服务的实例,随时可能在一个节点上停止,在另一个节点以
+ 一个新的IP启动一个新的Pod,因此不能以确定的IP和端口号提供服务。
+ 要稳定地提供服务需要服务发现和负载能力。
+ 在K8s集群中,客户端需要访问的服务就是service对象,每个Service会对应一个集群
+ 内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务
+ 
+ K8s  service资源对象
+ 
        
